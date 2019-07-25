@@ -48,6 +48,9 @@
         @apply --paper-font-subhead;
         @apply --paper-input-container-input;
       }
+      .right {
+        float: right;
+      }
     </style>
 
     <iron-ajax
@@ -75,10 +78,19 @@
           <p class="alert-error"><strong>Error:</strong> [[error]]</p>
         </template>
 
+        <template is="dom-if" if="{{registration}}">
+          <paper-input-container>
+            <label slot="input">Nombre</label>
+            <iron-input slot="input" bind-value="{{formData.name}}">
+              <input class="input-style" id="name" type="text" value="{{formData.name}}" placeholder="Nombre">
+            </iron-input>
+          </paper-input-container>
+        </template>
+
         <paper-input-container>
           <label slot="input">Email</label>
           <iron-input slot="input" bind-value="{{formData.email}}">
-            <input class="input-style" id="email" type="text" value="{{formData.email}}" placeholder="Email">
+            <input class="input-style" id="email" type="email" value="{{formData.email}}" placeholder="Email">
           </iron-input>
         </paper-input-container>
 
@@ -89,15 +101,23 @@
           </iron-input>
         </paper-input-container>
 
-        <div class="wrapper-btns">
-          <paper-button raised class="primary" on-tap="postLogin">Ingreso</paper-button>
-          <paper-button class="link" on-tap="postRegister">Registro</paper-button>
-        </div>
+        <template is="dom-if" if="{{!registration}}">
+          <div class="wrapper-btns">
+            <paper-button raised class="primary" on-tap="postLogin">Ingresa</paper-button>
+            <paper-button class="link right" on-tap="isRegister">registrate</paper-button>
+          </div>
+        </template>
+        <template is="dom-if" if="{{registration}}">
+          <div class="wrapper-btns">
+            <paper-button raised class="primary" on-tap="postRegister">Registrate</paper-button>
+            <paper-button class="link right" on-tap="isRegister">ingresa</paper-button>
+          </div>
+        </template>
       </div>
       <div id="authenticated" hidden$="[[!storedUser.loggedin]]">
         <h2>Hola, [[storedUser.name]]!</h2>
         <p>Estas autenticado. Podes ingresar a tu <a href="/accounts">Cuenta</a>!</p>
-        <!--log-out stored-user="{{storedUser}}"></log-out-->
+        <view-logout stored-user="{{storedUser}}"></view-logout>
       </div>
     </div>
   </template>
@@ -112,7 +132,11 @@
                       value: {}
                   },
                   storedUser: Object,
-                  error: String
+                  error: String,
+                  registration:{
+                      type: Boolean,
+                      value: false
+                  }
               }
           }
           _setReqBody() {
@@ -124,7 +148,7 @@
               this.$.registerLoginAjax.generateRequest();
           }
           postRegister() {
-              this.$.registerLoginAjax.url = 'http://localhost:3001/api/users';
+              this.$.registerLoginAjax.url = 'http://localhost:3000/api/users';
               this._setReqBody();
               this.$.registerLoginAjax.generateRequest();
           }
@@ -144,7 +168,15 @@
               this.formData = {};
           }
           handleUserError(event) {
-              this.error = JSON.parse(event.detail.request.xhr.response).errors.message;
+              let errors = JSON.parse(event.detail.request.xhr.response).errors;
+              this.error = '';
+              let that = this;
+              Object.keys(errors).map(function(key, index) {
+                that.error = that.error + ' ' + errors[key];
+              });
+          }
+          isRegister(){
+            this.registration = !this.registration;
           }
       }
       window.customElements.define(RegisterLogin.is, RegisterLogin);

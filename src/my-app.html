@@ -29,6 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="view-accounts.html">
 <link rel="lazy-import" href="my-view3.html">
 <link rel="lazy-import" href="my-view404.html">
+<link rel="import" href="view-logout.html">
 
 <dom-module id="my-app">
   <template>
@@ -69,6 +70,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: black;
         font-weight: bold;
       }
+
+      app-header .greeting,
+      app-header a {
+        color: #fff;
+        font-size: 13px;
+      }
+      app-header .greeting {
+        border-right: 1px solid rgba(255,255,255,.5);
+        display: inline-block;
+        padding-right: 6px;
+      }
     </style>
 
     <app-location
@@ -108,10 +120,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>App 910</div>
-            <a name="register-login" href="[[rootPath]]register-login" hidden$="[[storedUser.loggedin]]">Ingresar</a>
+            <a name="register-login" href="[[rootPath]]register-login" hidden$="[[storedUser.loggedin]]">Ingresa</a>
             <div hidden$="[[!storedUser.loggedin]]">
-              <span class="greeting">Hola [[storedUser.name]]!</span>
-              <!--log-out stored-user="{{storedUser}}" link></log-out-->
+              <!--span class="greeting">[[storedUser.name]]!</span-->
+              <view-logout stored-user="{{storedUser}}" link></view-logout>
             </div>
           </app-toolbar>
         </app-header>
