@@ -4,7 +4,8 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0"
+    "eslint-plugin-html": "^2.0.0",
+    "polymer-cli": "^1.6.0"
   },
   "scripts": {
     "lint": "npm run lint:javascript && polymer lint",
@@ -12,7 +13,7 @@
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI",
     "start:container": "node server.js",
-    "start": "bower install && polymer build && node server"
+    "start": "npm install & bower install && polymer build && node server"
   },
   "dependencies": {
     "express": "^4.17.1"
