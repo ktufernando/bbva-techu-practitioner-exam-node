@@ -10,6 +10,11 @@
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "start:container": "node server.js",
+    "start": "bower install && polymer build && node server"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }

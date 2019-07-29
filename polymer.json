@@ -9,8 +9,7 @@
     "src/view-404.html"
   ],
   "sources": [
-    "images/**/*",
-    "src/**/*"
+    "src/*"
   ],
   "extraDependencies": [
     "bower_components/webcomponentsjs/*.js",
@@ -20,15 +19,10 @@
   "lint": {
     "rules": ["polymer-2"]
   },
-  "builds": [
-    {
-      "preset": "es5-bundled"
-    },
-    {
-      "preset": "es6-bundled"
-    },
-    {
-      "preset": "es6-unbundled"
-    }
-  ]
+  "builds": [{
+    "name": "prod",
+    "js": {"minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  }]
 }

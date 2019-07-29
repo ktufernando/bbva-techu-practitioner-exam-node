@@ -24,11 +24,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="my-icons.html">
 
-<link rel="lazy-import" href="register-login.html">
+<link rel="lazy-import" href="view-register-login.html">
 <link rel="lazy-import" href="view-home.html">
 <link rel="lazy-import" href="view-accounts.html">
 <link rel="lazy-import" href="my-view3.html">
-<link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="view-404.html">
 <link rel="import" href="view-logout.html">
 
 <dom-module id="my-app">
@@ -122,7 +122,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div main-title>App 910</div>
             <a name="register-login" href="[[rootPath]]register-login" hidden$="[[storedUser.loggedin]]">Ingresa</a>
             <div hidden$="[[!storedUser.loggedin]]">
-              <!--span class="greeting">[[storedUser.name]]!</span-->
               <view-logout stored-user="{{storedUser}}" link></view-logout>
             </div>
           </app-toolbar>
