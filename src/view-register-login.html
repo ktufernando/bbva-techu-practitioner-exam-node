@@ -143,12 +143,12 @@
               this.$.registerLoginAjax.body = {user: this.formData};
           }
           postLogin() {
-              this.$.registerLoginAjax.url = 'http://localhost:3000/api/users/login';
+              this.$.registerLoginAjax.url = window.Polymer.apihost + '/api/users/login';
               this._setReqBody();
               this.$.registerLoginAjax.generateRequest();
           }
           postRegister() {
-              this.$.registerLoginAjax.url = 'http://localhost:3000/api/users';
+              this.$.registerLoginAjax.url = window.Polymer.apihost + '/api/users';
               this._setReqBody();
               this.$.registerLoginAjax.generateRequest();
           }

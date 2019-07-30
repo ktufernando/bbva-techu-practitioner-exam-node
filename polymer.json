@@ -24,5 +24,10 @@
     "js": {"minify": true},
     "css": {"minify": true},
     "html": {"minify": true}
-  }]
+  }],
+  "environment": {
+    "prod": {
+      "apihost": "https://bbva-techu-practitioner-back.herokuapp.com"
+    }
+  }
 }

@@ -1,10 +1,13 @@
-const express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000;
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = process.env.PORT || 5000;
 
-var path = require('path');
+app.use(express.static(path.resolve(__dirname, 'build/prod')));
 
-app.use(express.static(__dirname + '/build/prod'));
+app.get('/*', (req,res) => {
+  res.sendFile(path.resolve(__dirname, 'build/prod/index.html'));
+});
 
 app.listen(port);
 
